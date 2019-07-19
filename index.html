@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>全部项目</title>
+    <link rel="stylesheet" href="./lib/bootstrap.min.css">
+    <script src="./lib/jquery.min.js"></script>
+    <script src="./lib/bootstrap.min.js"></script>
+    <script src="./lib/vue.min.js"></script>
+    <style>
+        @keyframes footer {
+            0% {
+                transform: rotateY(0);
+            }
+            50% {
+                transform: rotateY(360deg);
+            }
+            100% {
+                transform: rotateY(0);
+            }
+        }
+        .center {
+            text-align: center;
+        }
+        .navbar {
+            position: fixed;
+            width: 100%;
+            margin-bottom: 50px;
+            z-index: 2;
+        }
+        .login{
+            border: 1px solid #fff;
+            margin-top: 5px;
+            height: 40px;
+            line-height: 40px;
+        }
+        .navbar-inverse .navbar-nav>.login>a{
+            padding-top: 10px;
+        }
+        .main {
+            padding-top: 50px;
+        }
+        .title {
+            font-weight: 300;
+            font-size: 48px;
+        }
+        .card {
+            height: 350px;
+            position: relative;
+        }
+        
+        .card .wrap {
+            width: 100%;
+            height: 291px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(0,0,0,0.4);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            
+        } 
+        .card:hover .wrap {
+            display: flex;
+        }
+        .card .view_button {
+            width: 150px;
+            height: 70px;
+            background-color: #fff;
+            border: 1px solid #fff;
+            
+        }
+        .card .view_button:hover {
+            background-color: rgb(26, 115, 232);
+            
+        }
+        .card .view_button:hover a {
+            color: #fff;
+        }
+        .card .view_button a {
+            line-height: 70px;
+            display: inline-block;
+            width: 150px;
+            text-align: center;
+            font-family: "Source Code Pro", "monaco", "PT Mono", "Courier", monospace;
+            color: black;
+            text-decoration: none;
+        }
+        .card img{
+            width: 100%;
+            height: 291px;
+            border: 1px solid rgb(204, 204, 204);
+        }
+
+        .card p {
+            margin: 0;
+            text-align: center;
+            font-family: "Source Code Pro", "monaco", "PT Mono", "Courier", monospace;
+            font-weight: 600;
+            font-size: 12px;
+            margin-top: 10px;
+            letter-spacing: 0.8px;
+            color: rgb(51, 51, 51);
+        }
+        .footer{
+            animation: footer 5s infinite;
+            /* color: white; */
+            /* background-color: rgb(32, 33, 36); */
+           
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+        <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">T</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="./index.html">Hubu 713 Studio</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li class="index"><a href="./index.html">首页 <span class="sr-only">(current)</span></a></li>
+        </ul>
+        </div>
+    </div>
+    </nav>
+    <div class="main">
+        
+        
+        <div class="container">
+            
+            <div class="row">
+                
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h1 class="title">全部项目</h1>
+                    <hr>
+                </div>
+                
+                
+                <div id="all_items">
+                    <div class="card col-xs-12 col-sm-6 col-md-4 col-lg-4" v-for="item in items" v-cloak>
+                        <div class="wrap">
+                            <div class="view_button">
+                                <a :href='"http://"+item.url'>View</a>
+                            </div>
+                        </div>
+                        <img :src='"./img/"+item.img' alt="">
+                        <p>{{item.name}}</p>
+                    </div>
+                </div>
+                
+                
+            </div>
+            
+        </div>
+        
+    </div>
+    <div class="footer container-fluid">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h2 class="center">Hubu 713 Studio</h2>
+                <p class="center">2019 All rights reserved.</p>
+        </div>
+    </div>
+</body>
+<script>
+    $(document).ready(function(){
+        var vm1 = new Vue({
+            el: '#all_items',
+            data: {
+                items: [
+                    { id: '加载中',name:'加载中',url:'#',img:'' },
+                ]
+            }
+        })
+        $.ajax({
+            url:'/project/get_all',
+            type:'GET',
+            success:function(data){
+                if(data.status==200){
+                    vm1.items=data.data;
+                }else{
+                    vm1.data.items==[
+                        { id: '加载中',name:'加载中',url:'#',img:'' },
+                    ]
+                }
+            }
+        })
+    })
+    
+</script>
+</html>
