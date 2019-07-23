@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>713实验室首页</title>
+    <title>文圣的首页</title>
     <link rel="stylesheet" href="./lib/bootstrap.min.css">
     <script src="./lib/jquery.min.js"></script>
     <script src="./lib/bootstrap.min.js"></script>
@@ -604,7 +604,7 @@
                     <li v-for="item in items">
                         <h4>{{item.name}}</h4>
                         <br>
-                        <p>项目网址：<a :href='"http://"+item.url'>{{item.url}}</a></p>
+                        <p>项目网址：<a :href='item.url'>{{item.url}}</a></p>
                         <hr>
                     </li>
                 </ul>
