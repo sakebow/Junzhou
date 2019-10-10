@@ -1,1 +1,1 @@
-window.WEBPACK_ASSETS={"app":{"js":"c1526352e62adbedcad0.index.js"}}
+window.WEBPACK_ASSETS={"app":{"js":"5b507199c722a617baca.index.js"}}
